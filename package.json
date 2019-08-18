@@ -10,7 +10,7 @@
     "email": "lisowski54@gmail.com"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node ./test.js",
     "lint": "eslint src --ext .ts,.js --format './dist/index.js'",
     "release": "auto shipit"
   },
