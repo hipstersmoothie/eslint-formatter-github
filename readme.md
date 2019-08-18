@@ -2,7 +2,7 @@
   <img  height="200"
     src="./logo.png">
   <h1>eslint-formatter-github</h1>
-  <p>Github annotations formatter for <a href="https://eslint.org">ESLint</a></p>
+  <p>Github annotation formatter for <a href="https://eslint.org">ESLint</a></p>
 </div>
 
 ## Highlights
