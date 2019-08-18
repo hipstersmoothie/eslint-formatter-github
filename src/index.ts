@@ -8,7 +8,7 @@ import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
 
-var APP_ID = process.env.APP_ID ? Number(process.env.APP_ID) : 38817;
+const APP_ID = process.env.APP_ID ? Number(process.env.APP_ID) : 38817;
 /**
  * Before you say anything I *know* this is horribly insecure.
  *
@@ -105,8 +105,6 @@ function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
     'warning',
     'failure'
   ];
-
-  console.log(results);
 
   for (const result of results) {
     const { filePath, messages } = result;
