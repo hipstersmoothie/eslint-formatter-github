@@ -1,3 +1,15 @@
+# v0.3.0 (Sun Aug 18 2019)
+
+#### 🚀  Enhancement
+
+- switch to tool scoped variables so users can load multiple github app… [#6](https://github.com/hipstersmoothie/eslint-formatter-github/pull/6) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.2.2 (Sun Aug 18 2019)
 
 #### 📝  Documentation
