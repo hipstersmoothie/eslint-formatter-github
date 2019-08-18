@@ -1,13 +1,27 @@
-import chalk from 'chalk';
+import path from 'path';
 import eslint from 'eslint';
 import execa from 'execa';
-import plur from 'plur';
+import pretty from 'eslint-formatter-pretty';
+import envCi from 'env-ci';
 
+import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
-import { request } from '@octokit/request';
 
 const APP_ID = 38817;
+/**
+ * Before you say anything I *know* this is horribly insecure.
+ *
+ * If we were not to to this then every user would have to create
+ * their own GitHub App and manage the APP_ID and PRIVATE_KEY through
+ * env vars.
+ *
+ * How could this go wrong? Well this PRIVATE_KEY only creates jwt
+ * tokens that work on people who have installed the ESLint Results
+ * App. If an attacker got ahold of the token they could only read repo
+ * metadata and read/write checks. So the attack surface is really only
+ * messing with a users checks, which is not too risky.
+ */
 const PRIVATE_KEY = `
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA5jyJgi6Tx5lpGj4kBJrc72ZOUd0x0ZyAWphv3cuZ7mXLH+eo
@@ -37,17 +51,10 @@ rxXIyGcdFUjpY/U2tobjXousbYyz8/DqgDoLWXOMt2dNkbbNAN8L3OMVTGb6TzS2
 gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
+const { isCi, ...env } = envCi();
 const app = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
 const jwt = app.getSignedJsonWebToken();
-
-console.log(jwt);
-
-const OWNER = 'hipstersmoothie';
-const REPO = 'eslint-formatter-pretty';
-const octokit = new Octokit({
-  auth: `Bearer ${jwt}`,
-  previews: ['symmetra-preview', 'machine-man-preview']
-});
+const [owner = '', repo = ''] = 'slug' in env ? env.slug.split('/') : [];
 
 function byErrorCount(
   a: eslint.CLIEngine.LintResult,
@@ -68,39 +75,89 @@ function byErrorCount(
   return b.errorCount - a.errorCount;
 }
 
-async function createAnnotations() {
-  // Example of using authenticated app to GET an individual installation
-  // https://developer.github.com/v3/apps/#find-repository-installation
-  try {
-    const { data } = await request('GET /repos/:owner/:repo', {
-      owner: OWNER,
-      repo: REPO,
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        accept: 'application/vnd.github.machine-man-preview+json'
-      }
-    });
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-  // const HEAD = await execa('git', ['rev-parse', 'HEAD']);
+async function authenticateApp() {
+  const { data } = await request('GET /repos/:owner/:repo/installation', {
+    owner,
+    repo,
+    headers: {
+      authorization: `Bearer ${jwt}`,
+      accept: 'application/vnd.github.machine-man-preview+json'
+    }
+  });
 
-  // await octokit.checks.create({
-  //   owner: OWNER,
-  //   repo: REPO,
-  //   name: 'Lint',
-  //   head_sha: HEAD.stdout
-  // });
+  const installationId = data.id;
+  const token = await app.getInstallationAccessToken({
+    installationId
+  });
+
+  return new Octokit({
+    auth: token,
+    previews: ['symmetra-preview']
+  });
 }
 
-createAnnotations();
+function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
+  const annotations: Octokit.ChecksCreateParamsOutputAnnotations[] = [];
+  const levels: Octokit.ChecksCreateParamsOutputAnnotations['annotation_level'][] = [
+    'notice',
+    'warning',
+    'failure'
+  ];
+
+  for (const result of results) {
+    const { filePath, messages } = result;
+
+    for (const msg of messages) {
+      const { line, severity, ruleId, message } = msg;
+      const annotationLevel = levels[severity];
+
+      annotations.push({
+        path: path.relative(process.cwd(), filePath),
+        start_line: line,
+        end_line: line,
+        annotation_level: annotationLevel,
+        message: `[${ruleId}] ${message}`
+      });
+    }
+  }
+
+  return annotations;
+}
+
+async function addCheck(
+  results: eslint.CLIEngine.LintResult[],
+  errorCount: number,
+  warningCount: number
+) {
+  if (!isCi) {
+    return;
+  }
+
+  const annotations = createAnnotations(results);
+  const HEAD = await execa('git', ['rev-parse', 'HEAD']);
+  const octokit = await authenticateApp();
+  const summary =
+    (errorCount > 0 && 'Your project seems to have some errors.') ||
+    (warningCount > 0 && 'Your project seems to have some warnings.') ||
+    'Your project passed lint!';
+
+  await octokit.checks.create({
+    owner,
+    repo,
+    name: 'Lint',
+    head_sha: HEAD.stdout,
+    conclusion: (errorCount > 0 && 'failure') || 'success',
+    output: {
+      title: 'ESLint Results',
+      summary,
+      annotations
+    }
+  });
+}
 
 const formatter: eslint.CLIEngine.Formatter = results => {
   let errorCount = 0;
   let warningCount = 0;
-
-  // createAnnotations(results);
 
   results.sort(byErrorCount).forEach(result => {
     const { messages } = result;
@@ -113,19 +170,9 @@ const formatter: eslint.CLIEngine.Formatter = results => {
     warningCount += result.warningCount;
   });
 
-  let output = '\n';
+  addCheck(results, errorCount, warningCount);
 
-  if (warningCount > 0) {
-    output += `${chalk.yellow(
-      `${warningCount} ${plur('warning', warningCount)}`
-    )}\n`;
-  }
-
-  if (errorCount > 0) {
-    output += `${chalk.red(`${errorCount} ${plur('error', errorCount)}`)}\n`;
-  }
-
-  return errorCount + warningCount > 0 ? output || '' : '';
+  return pretty(results);
 };
 
 export = formatter;
