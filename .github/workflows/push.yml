@@ -26,6 +26,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Skip CI
+      uses: veggiemonk/skip-commit@master
+      env:
+        COMMIT_FILTER: skip ci
     - name: Prepare repository
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -35,10 +39,6 @@ jobs:
         git remote add origin "https://$GH_TOKEN@github.com/hipstersmoothie/eslint-formatter-github.git"
         git fetch origin
         git branch --set-upstream-to origin/master
-    - name: Skip CI
-      uses: veggiemonk/skip-commit@master
-      env:
-        COMMIT_FILTER: skip ci
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
