@@ -20,7 +20,10 @@
     "formatter",
     "reporter",
     "lint",
-    "validate"
+    "validate",
+    "github",
+    "annotations",
+    "checks"
   ],
   "files": [
     "dist"
