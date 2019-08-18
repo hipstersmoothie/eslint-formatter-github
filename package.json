@@ -1,6 +1,6 @@
 {
   "name": "jest-github-reporter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Report tests failures from Jest in GitHub.",
   "main": "dist/index.js",
   "repository": "hipstersmoothie/jest-github-reporter",
@@ -44,16 +44,24 @@
     "strip-ansi": "^5.2.0"
   },
   "lint-staged": {
-    "*.{js,css,md}": ["prettier --write", "git add"]
+    "*.{js,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true
   },
   "jest": {
     "testLocationInResults": true,
-    "reporters": ["./dist/index.js"]
+    "reporters": [
+      "./dist/index.js"
+    ]
   },
   "auto": {
-    "plugins": ["npm", "released"]
+    "plugins": [
+      "npm",
+      "released"
+    ]
   }
 }
