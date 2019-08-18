@@ -1,7 +1,7 @@
 {
   "name": "eslint-formatter-github",
-  "version": "2.1.1",
-  "description": "Post eslint results to Github PRs as annotations.",
+  "version": "0.1.0",
+  "description": "Post eslint results to Github PRs as annotations",
   "license": "MIT",
   "repository": "hipstersmoothie/eslint-formatter-github",
   "main": "dist/index.js",
@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "lint": "eslint src --ext .ts,.js --format './dist/index.js'"
+    "lint": "eslint src --ext .ts,.js --format './dist/index.js'",
+    "release": "auto shipit"
   },
   "keywords": [
     "eslint",
@@ -38,6 +39,7 @@
     "@types/lru-cache": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "auto": "^7.3.2",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -64,5 +66,11 @@
   },
   "prettier": {
     "singleQuote": true
+  },
+  "auto": {
+    "plugins": [
+      "npm",
+      "released"
+    ]
   }
 }
