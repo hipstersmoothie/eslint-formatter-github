@@ -40,5 +40,7 @@ jobs:
         yarn
         yarn build
         git config user.email lisowski54@gmail.com
+        git config user.email
         git config user.name "Andrew Lisowski"
+        git config user.name
         yarn release
