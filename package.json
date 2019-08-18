@@ -26,13 +26,14 @@
   },
   "dependencies": {
     "@octokit/app": "^4.1.0",
+    "@octokit/request": "^5.0.2",
     "@octokit/rest": "^16.28.7",
     "chalk": "^2.1.0",
+    "eslint-formatter-pretty": "^2.1.1",
     "execa": "^2.0.4",
     "plur": "^3.0.1"
   },
   "devDependencies": {
-    "@octokit/request": "^5.0.2",
     "@types/eslint": "^4.16.8",
     "@types/lru-cache": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",

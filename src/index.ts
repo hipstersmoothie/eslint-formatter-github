@@ -3,12 +3,13 @@ import path from 'path';
 import eslint from 'eslint';
 import execa from 'execa';
 import plur from 'plur';
+import pretty from 'eslint-formatter-pretty';
 
 import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
 
-const APP_ID = 38817;
+var APP_ID = 38817;
 const PRIVATE_KEY = `
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA5jyJgi6Tx5lpGj4kBJrc72ZOUd0x0ZyAWphv3cuZ7mXLH+eo
@@ -154,21 +155,9 @@ const formatter: eslint.CLIEngine.Formatter = results => {
     warningCount += result.warningCount;
   });
 
-  let output = '\n';
-
-  if (warningCount > 0) {
-    output += `${chalk.yellow(
-      `${warningCount} ${plur('warning', warningCount)}`
-    )}\n`;
-  }
-
-  if (errorCount > 0) {
-    output += `${chalk.red(`${errorCount} ${plur('error', errorCount)}`)}\n`;
-  }
-
   addCheck(results, errorCount, warningCount);
 
-  return errorCount + warningCount > 0 ? output || '' : '';
+  return pretty(results);
 };
 
 export = formatter;
