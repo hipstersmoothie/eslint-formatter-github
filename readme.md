@@ -40,7 +40,24 @@ Reasons:
 1. You think they way we exposed the keys is bad
 2. You are on Github Enterprise and cannot use the public app
 
-In these situations all you need to do is set a few environment variables.
+In these situations all you need to do is create a GitHub app and set a few environment variables.
 
-- `APP_ID` - Your GitHub application's ID
-- `PRIVATE_KEY` - The private RSA key for your application
+### 1. Create a GitHub app
+
+Go to [this page](https://github.com/settings/apps) to create a new GitHub app. You need to set the following fields:
+
+- `name` - The name that shows for your app in the checks reports
+- `Homepage URL` - You can set this to anything. Ours is set to `https://github.com`
+- `Webhook URL` - You can set this to anything. Ours is set to `https://github.com`
+
+Then hit `Save Changes` and you're all done setting up your GitHub app.
+
+### 2. Set `APP_ID` environment variable
+
+Your GitHub application's ID. This can be found at the top of your GitHub app's edit page.
+
+### 3. Set `PRIVATE_KEY` environment variable
+
+The private RSA key for your application. The prompt to generate the RSA key is at the bottom of your GitHub app's edit page.
+
+Once you have generated a key, open the file that is downloaded and copy to text into the `PRIVATE_KEY` environment variable.
