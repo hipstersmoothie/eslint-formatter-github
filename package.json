@@ -1,7 +1,7 @@
 {
   "name": "eslint-formatter-github",
   "version": "0.1.0",
-  "description": "Post eslint results to Github PRs as annotations.",
+  "description": "Post eslint results to Github PRs as annotations",
   "license": "MIT",
   "repository": "hipstersmoothie/eslint-formatter-github",
   "main": "dist/index.js",
