@@ -2,14 +2,16 @@
   <img  height="200"
     src="./logo.png">
   <h1>eslint-formatter-github</h1>
-  <p>Github annotation formatter for <a href="https://eslint.org">ESLint</a></p>
+  <p>See ESLint errors and warnings directly in pull requests.</p>
 </div>
 
 ## Highlights
 
-- Report your eslint results in a more interactive way!
+- Report your eslint results as annotations using the [GitHub Checks API](https://developer.github.com/v3/checks/)
 - Only runs in CI environment
-- Uses eslint-formatter-pretty as the normal reporter
+- Uses [eslint-formatter-pretty](https://github.com/sindresorhus/eslint-formatter-pretty) as the formatter for displaying the lint results
+
+![Example of annotations being included in a pull request](./example.png)
 
 ## Install
 
