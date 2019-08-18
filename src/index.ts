@@ -40,14 +40,8 @@ gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 const app = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
 const jwt = app.getSignedJsonWebToken();
 
-console.log(jwt);
-
 const OWNER = 'hipstersmoothie';
-const REPO = 'eslint-formatter-pretty';
-const octokit = new Octokit({
-  auth: `Bearer ${jwt}`,
-  previews: ['symmetra-preview', 'machine-man-preview']
-});
+const REPO = 'eslint-formatter-github';
 
 function byErrorCount(
   a: eslint.CLIEngine.LintResult,
@@ -68,30 +62,37 @@ function byErrorCount(
   return b.errorCount - a.errorCount;
 }
 
-async function createAnnotations() {
-  // Example of using authenticated app to GET an individual installation
-  // https://developer.github.com/v3/apps/#find-repository-installation
-  try {
-    const { data } = await request('GET /repos/:owner/:repo', {
-      owner: OWNER,
-      repo: REPO,
-      headers: {
-        authorization: `Bearer ${jwt}`,
-        accept: 'application/vnd.github.machine-man-preview+json'
-      }
-    });
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-  // const HEAD = await execa('git', ['rev-parse', 'HEAD']);
+async function authenticateApp() {
+  const { data } = await request('GET /repos/:owner/:repo/installation', {
+    owner: OWNER,
+    repo: REPO,
+    headers: {
+      authorization: `Bearer ${jwt}`,
+      accept: 'application/vnd.github.machine-man-preview+json'
+    }
+  });
 
-  // await octokit.checks.create({
-  //   owner: OWNER,
-  //   repo: REPO,
-  //   name: 'Lint',
-  //   head_sha: HEAD.stdout
-  // });
+  const installationId = data.id;
+  const token = await app.getInstallationAccessToken({
+    installationId
+  });
+
+  return new Octokit({
+    auth: token,
+    previews: ['symmetra-preview']
+  });
+}
+
+async function createAnnotations() {
+  const HEAD = await execa('git', ['rev-parse', 'HEAD']);
+  const octokit = await authenticateApp();
+
+  await octokit.checks.create({
+    owner: OWNER,
+    repo: REPO,
+    name: 'Lint',
+    head_sha: HEAD.stdout
+  });
 }
 
 createAnnotations();
