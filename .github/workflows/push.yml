@@ -39,8 +39,7 @@ jobs:
       run: |
         yarn
         yarn build
+        git remote add origin https://github.com/hipstersmoothie/eslint-formatter-github
         git config user.email lisowski54@gmail.com
-        git config user.email
         git config user.name "Andrew Lisowski"
-        git config user.name
         yarn release
