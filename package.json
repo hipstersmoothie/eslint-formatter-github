@@ -1,6 +1,6 @@
 {
   "name": "eslint-formatter-github",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Post eslint results to Github PRs as annotations",
   "license": "MIT",
   "repository": "hipstersmoothie/eslint-formatter-github",
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint src --ext .ts,.js --format './dist/index.js'",
-    "release": "auto shipit"
+    "release": "auto shipit -w"
   },
   "keywords": [
     "eslint",
