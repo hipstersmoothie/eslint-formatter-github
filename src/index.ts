@@ -8,7 +8,9 @@ import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
 
-const APP_ID = process.env.APP_ID ? Number(process.env.APP_ID) : 38817;
+const APP_ID = process.env.ESLINT_APP_ID
+  ? Number(process.env.ESLINT_APP_ID)
+  : 38817;
 /**
  * Before you say anything I *know* this is horribly insecure.
  *
@@ -23,7 +25,7 @@ const APP_ID = process.env.APP_ID ? Number(process.env.APP_ID) : 38817;
  * messing with a users checks, which is not too risky.
  */
 const PRIVATE_KEY =
-  process.env.PRIVATE_KEY ||
+  process.env.ESLINT_PRIVATE_KEY ||
   `
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA5jyJgi6Tx5lpGj4kBJrc72ZOUd0x0ZyAWphv3cuZ7mXLH+eo
