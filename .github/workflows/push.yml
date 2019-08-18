@@ -27,11 +27,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Prepare repository
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git checkout "${GITHUB_REF:11}"
-        REMOTE_REPO="https://${GH_TOKEN}@github.com/hipstersmoothie/eslint-formatter-github.git"
         git remote rm origin
-        git remote add origin $REMOTE_REPO
+        git remote add origin "https://$GH_TOKEN@github.com/hipstersmoothie/eslint-formatter-github.git"
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
