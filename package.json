@@ -22,6 +22,9 @@
     "lint",
     "validate"
   ],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "eslint": ">= 5.x"
   },
