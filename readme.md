@@ -52,11 +52,11 @@ Go to [this page](https://github.com/settings/apps) to create a new GitHub app. 
 
 Then hit `Save Changes` and you're all done setting up your GitHub app.
 
-### 2. Set `APP_ID` environment variable
+### 2. Set `ESLINT_APP_ID` environment variable
 
 Your GitHub application's ID. This can be found at the top of your GitHub app's edit page.
 
-### 3. Set `PRIVATE_KEY` environment variable
+### 3. Set `ESLINT_PRIVATE_KEY` environment variable
 
 The private RSA key for your application. The prompt to generate the RSA key is at the bottom of your GitHub app's edit page.
 
