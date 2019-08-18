@@ -25,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Skip CI
+      uses: veggiemonk/skip-commit@master
+      env:
+        COMMIT_FILTER: skip ci
     - uses: actions/checkout@v1
     - name: Prepare repository
       env:
