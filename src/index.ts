@@ -83,25 +83,64 @@ async function authenticateApp() {
   });
 }
 
-async function createAnnotations() {
+function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
+  const annotations: Octokit.ChecksCreateParamsOutputAnnotations[] = [];
+  const levels: Octokit.ChecksCreateParamsOutputAnnotations['annotation_level'][] = [
+    'notice',
+    'warning',
+    'failure'
+  ];
+
+  for (const result of results) {
+    const { filePath, messages } = result;
+
+    for (const msg of messages) {
+      const { line, severity, ruleId, message } = msg;
+      const annotationLevel = levels[severity];
+
+      annotations.push({
+        path: filePath,
+        start_line: line,
+        end_line: line,
+        annotation_level: annotationLevel,
+        message: `[${ruleId}] ${message}`
+      });
+    }
+  }
+
+  return annotations;
+}
+
+async function addCheck(
+  results: eslint.CLIEngine.LintResult[],
+  errorCount: number,
+  warningCount: number
+) {
+  const annotations = createAnnotations(results);
   const HEAD = await execa('git', ['rev-parse', 'HEAD']);
   const octokit = await authenticateApp();
+  const summary =
+    (errorCount > 0 && 'Your project seems to have some errors.') ||
+    (warningCount > 0 && 'Your project seems to have some warnings.') ||
+    'Your project passed lint!';
 
   await octokit.checks.create({
     owner: OWNER,
     repo: REPO,
     name: 'Lint',
-    head_sha: HEAD.stdout
+    head_sha: HEAD.stdout,
+    conclusion: (errorCount > 0 && 'failure') || 'success',
+    output: {
+      title: 'ESLint Results',
+      summary,
+      annotations
+    }
   });
 }
-
-createAnnotations();
 
 const formatter: eslint.CLIEngine.Formatter = results => {
   let errorCount = 0;
   let warningCount = 0;
-
-  // createAnnotations(results);
 
   results.sort(byErrorCount).forEach(result => {
     const { messages } = result;
@@ -125,6 +164,8 @@ const formatter: eslint.CLIEngine.Formatter = results => {
   if (errorCount > 0) {
     output += `${chalk.red(`${errorCount} ${plur('error', errorCount)}`)}\n`;
   }
+
+  addCheck(results, errorCount, warningCount);
 
   return errorCount + warningCount > 0 ? output || '' : '';
 };
