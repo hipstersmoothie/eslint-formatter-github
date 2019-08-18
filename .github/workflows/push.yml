@@ -26,6 +26,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Prepare repository
+      run: git checkout "${GITHUB_REF:11}"
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
