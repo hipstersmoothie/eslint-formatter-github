@@ -28,3 +28,17 @@ Then just use the formatter and it will report errors and warnings on PRs!
 ```sh
 eslint --format github file.js
 ```
+
+## Using you own GitHub App
+
+You might not want to use our github app for the formatter.
+
+Reasons:
+
+1. You think they way we exposed the keys is bad
+2. You are on Github Enterprise and cannot use the public app
+
+In these situations all you need to do is set a few environment variables.
+
+- `APP_ID` - Your GitHub application's ID
+- `PRIVATE_KEY` - The private RSA key for your application
