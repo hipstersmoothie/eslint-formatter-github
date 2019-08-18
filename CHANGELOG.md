@@ -1,3 +1,15 @@
+# v0.1.16 (Sun Aug 18 2019)
+
+#### ⚠️  Pushed to master
+
+- :pray:  ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.1.14 (Sun Aug 18 2019)
 
 #### ⚠️  Pushed to master
