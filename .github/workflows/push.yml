@@ -23,6 +23,9 @@ jobs:
         yarn lint
   release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js 12.x
