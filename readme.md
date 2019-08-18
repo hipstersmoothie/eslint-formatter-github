@@ -1,6 +1,9 @@
-# eslint-formatter-github
-
-> Github annotations formatter for [ESLint](https://eslint.org)
+<div align="center">
+  <img  height="200"
+    src="./logo.png">
+  <h1>eslint-formatter-github</h1>
+  <p>Github annotations formatter for <a href="https://eslint.org">ESLint</a></p>
+</div>
 
 ## Highlights
 
@@ -17,6 +20,10 @@ yarn add -D eslint-formatter-github
 ```
 
 ## Usage
+
+You will need to install [the github app](https://github.com/apps/eslint-results) to your repo.
+
+Then just use the formatter and it will report errors and warnings on PRs!
 
 ```sh
 eslint --format github file.js

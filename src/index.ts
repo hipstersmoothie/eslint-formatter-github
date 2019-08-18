@@ -1,15 +1,27 @@
-import chalk from 'chalk';
 import path from 'path';
 import eslint from 'eslint';
 import execa from 'execa';
-import plur from 'plur';
 import pretty from 'eslint-formatter-pretty';
+import envCi from 'env-ci';
 
 import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
 
-var APP_ID = 38817;
+const APP_ID = 38817;
+/**
+ * Before you say anything I *know* this is horribly insecure.
+ *
+ * If we were not to to this then every user would have to create
+ * their own GitHub App and manage the APP_ID and PRIVATE_KEY through
+ * env vars.
+ *
+ * How could this go wrong? Well this PRIVATE_KEY only creates jwt
+ * tokens that work on people who have installed the ESLint Results
+ * App. If an attacker got ahold of the token they could only read repo
+ * metadata and read/write checks. So the attack surface is really only
+ * messing with a users checks, which is not too risky.
+ */
 const PRIVATE_KEY = `
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA5jyJgi6Tx5lpGj4kBJrc72ZOUd0x0ZyAWphv3cuZ7mXLH+eo
@@ -39,11 +51,10 @@ rxXIyGcdFUjpY/U2tobjXousbYyz8/DqgDoLWXOMt2dNkbbNAN8L3OMVTGb6TzS2
 gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
+const { isCi, ...env } = envCi();
 const app = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
 const jwt = app.getSignedJsonWebToken();
-
-const OWNER = 'hipstersmoothie';
-const REPO = 'eslint-formatter-github';
+const [owner = '', repo = ''] = 'slug' in env ? env.slug.split('/') : [];
 
 function byErrorCount(
   a: eslint.CLIEngine.LintResult,
@@ -66,8 +77,8 @@ function byErrorCount(
 
 async function authenticateApp() {
   const { data } = await request('GET /repos/:owner/:repo/installation', {
-    owner: OWNER,
-    repo: REPO,
+    owner,
+    repo,
     headers: {
       authorization: `Bearer ${jwt}`,
       accept: 'application/vnd.github.machine-man-preview+json'
@@ -118,6 +129,10 @@ async function addCheck(
   errorCount: number,
   warningCount: number
 ) {
+  if (!isCi) {
+    return;
+  }
+
   const annotations = createAnnotations(results);
   const HEAD = await execa('git', ['rev-parse', 'HEAD']);
   const octokit = await authenticateApp();
@@ -127,8 +142,8 @@ async function addCheck(
     'Your project passed lint!';
 
   await octokit.checks.create({
-    owner: OWNER,
-    repo: REPO,
+    owner,
+    repo,
     name: 'Lint',
     head_sha: HEAD.stdout,
     conclusion: (errorCount > 0 && 'failure') || 'success',
