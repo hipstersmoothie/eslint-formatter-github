@@ -1,3 +1,15 @@
+# v0.2.0 (Sun Aug 18 2019)
+
+#### 🚀  Enhancement
+
+- add support for using your own GitHub app [#3](https://github.com/hipstersmoothie/eslint-formatter-github/pull/3) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.1.16 (Sun Aug 18 2019)
 
 #### ⚠️  Pushed to master
