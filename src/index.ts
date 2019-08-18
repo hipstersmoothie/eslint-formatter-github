@@ -1,11 +1,12 @@
 import chalk from 'chalk';
+import path from 'path';
 import eslint from 'eslint';
 import execa from 'execa';
 import plur from 'plur';
 
+import { request } from '@octokit/request';
 import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
-import { request } from '@octokit/request';
 
 const APP_ID = 38817;
 const PRIVATE_KEY = `
@@ -99,7 +100,7 @@ function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
       const annotationLevel = levels[severity];
 
       annotations.push({
-        path: filePath,
+        path: path.relative(process.cwd(), filePath),
         start_line: line,
         end_line: line,
         annotation_level: annotationLevel,
