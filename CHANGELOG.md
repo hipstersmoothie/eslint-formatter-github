@@ -1,3 +1,16 @@
+# v0.1.12 (Sun Aug 18 2019)
+
+#### ⚠️  Pushed to master
+
+- add skip ci action  ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- turn off verbose auto  ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.1.11 (Sun Aug 18 2019)
 
 
