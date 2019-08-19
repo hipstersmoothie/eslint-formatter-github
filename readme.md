@@ -61,3 +61,7 @@ Your GitHub application's ID. This can be found at the top of your GitHub app's 
 The private RSA key for your application. The prompt to generate the RSA key is at the bottom of your GitHub app's edit page.
 
 Once you have generated a key, open the file that is downloaded and copy to text into the `PRIVATE_KEY` environment variable.
+
+### 4. Set `GH_API` (enterprise only)
+
+To get this package to work on github enterprise instances you will need to set the `GH_API` environment variable to a url pointing towards your enterprise GitHub's API.
