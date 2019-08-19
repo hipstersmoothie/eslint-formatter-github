@@ -1,3 +1,15 @@
+# v0.3.1 (Mon Aug 19 2019)
+
+#### 🐛  Bug Fix
+
+- use create-check for heavy lifting [#7](https://github.com/hipstersmoothie/eslint-formatter-github/pull/7) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.3.0 (Sun Aug 18 2019)
 
 #### 🚀  Enhancement
