@@ -91,6 +91,13 @@ const formatter: eslint.CLIEngine.Formatter = results => {
     warningCount += result.warningCount;
   });
 
+  console.log(process.env.ESLINT_APP_ID, APP_ID, {
+    appId: process.env.ESLINT_APP_ID
+      ? Number(process.env.ESLINT_APP_ID)
+      : APP_ID,
+    privateKey: process.env.ESLINT_PRIVATE_KEY || PRIVATE_KEY
+  });
+
   createCheck({
     tool: 'ESLint',
     name: 'Check Code for Errors',
