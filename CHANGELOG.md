@@ -1,3 +1,15 @@
+# v0.3.3 (Mon Aug 19 2019)
+
+#### 🐛  Bug Fix
+
+- must load env vars in function so other scripts have chance to set vars [#12](https://github.com/hipstersmoothie/eslint-formatter-github/pull/12) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.3.2 (Mon Aug 19 2019)
 
 #### 🐛  Bug Fix
