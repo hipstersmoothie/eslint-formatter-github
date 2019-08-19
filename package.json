@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "start": "yarn build --watch",
     "lint": "eslint src --ext .ts,.js --format './dist/index.js'",
     "release": "auto shipit"
   },
@@ -33,7 +34,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.28.7",
-    "create-check": "^0.2.2",
+    "create-check": "^0.3.0",
     "eslint-formatter-pretty": "^2.1.1"
   },
   "devDependencies": {
