@@ -5,9 +5,7 @@ import pretty from 'eslint-formatter-pretty';
 
 import Octokit from '@octokit/rest';
 
-const APP_ID = process.env.ESLINT_APP_ID
-  ? Number(process.env.ESLINT_APP_ID)
-  : 38817;
+const APP_ID = 38817;
 /**
  * Before you say anything I *know* this is horribly insecure.
  *
@@ -21,9 +19,7 @@ const APP_ID = process.env.ESLINT_APP_ID
  * metadata and read/write checks. So the attack surface is really only
  * messing with a users checks, which is not too risky.
  */
-const PRIVATE_KEY =
-  process.env.ESLINT_PRIVATE_KEY ||
-  `
+const PRIVATE_KEY = `
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA5jyJgi6Tx5lpGj4kBJrc72ZOUd0x0ZyAWphv3cuZ7mXLH+eo
 4Gg/osi/gxfu8Nznittkc155dbHsk9a2fkIfAWPGPXwloOcBLfBea+c1lp7L63Zn
@@ -101,8 +97,10 @@ const formatter: eslint.CLIEngine.Formatter = results => {
     annotations: createAnnotations(results),
     errorCount,
     warningCount,
-    appId: APP_ID,
-    privateKey: PRIVATE_KEY
+    appId: process.env.ESLINT_APP_ID
+      ? Number(process.env.ESLINT_APP_ID)
+      : APP_ID,
+    privateKey: process.env.ESLINT_PRIVATE_KEY || PRIVATE_KEY
   });
 
   return pretty(results);
