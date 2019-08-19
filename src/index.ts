@@ -5,7 +5,7 @@ import pretty from 'eslint-formatter-pretty';
 
 import Octokit from '@octokit/rest';
 
-var APP_ID = process.env.ESLINT_APP_ID
+const APP_ID = process.env.ESLINT_APP_ID
   ? Number(process.env.ESLINT_APP_ID)
   : 38817;
 /**
