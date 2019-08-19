@@ -1,11 +1,8 @@
 import path from 'path';
 import eslint from 'eslint';
-import execa from 'execa';
+import createCheck from 'create-check';
 import pretty from 'eslint-formatter-pretty';
-import envCi from 'env-ci';
 
-import { request } from '@octokit/request';
-import { App } from '@octokit/app';
 import Octokit from '@octokit/rest';
 
 const APP_ID = process.env.ESLINT_APP_ID
@@ -55,51 +52,6 @@ rxXIyGcdFUjpY/U2tobjXousbYyz8/DqgDoLWXOMt2dNkbbNAN8L3OMVTGb6TzS2
 gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
-const { isCi, ...env } = envCi();
-const app = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
-const jwt = app.getSignedJsonWebToken();
-const [owner = '', repo = ''] = 'slug' in env ? env.slug.split('/') : [];
-
-function byErrorCount(
-  a: eslint.CLIEngine.LintResult,
-  b: eslint.CLIEngine.LintResult
-) {
-  if (a.errorCount === b.errorCount) {
-    return b.warningCount - a.warningCount;
-  }
-
-  if (a.errorCount === 0) {
-    return -1;
-  }
-
-  if (b.errorCount === 0) {
-    return 1;
-  }
-
-  return b.errorCount - a.errorCount;
-}
-
-async function authenticateApp() {
-  const { data } = await request('GET /repos/:owner/:repo/installation', {
-    owner,
-    repo,
-    headers: {
-      authorization: `Bearer ${jwt}`,
-      accept: 'application/vnd.github.machine-man-preview+json'
-    }
-  });
-
-  const installationId = data.id;
-  const token = await app.getInstallationAccessToken({
-    installationId
-  });
-
-  return new Octokit({
-    auth: token,
-    previews: ['symmetra-preview']
-  });
-}
-
 function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
   const annotations: Octokit.ChecksCreateParamsOutputAnnotations[] = [];
   const levels: Octokit.ChecksCreateParamsOutputAnnotations['annotation_level'][] = [
@@ -128,42 +80,11 @@ function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
   return annotations;
 }
 
-async function addCheck(
-  results: eslint.CLIEngine.LintResult[],
-  errorCount: number,
-  warningCount: number
-) {
-  if (!isCi) {
-    return;
-  }
-
-  const annotations = createAnnotations(results);
-  const HEAD = await execa('git', ['rev-parse', 'HEAD']);
-  const octokit = await authenticateApp();
-  const summary =
-    (errorCount > 0 && 'Your project seems to have some errors.') ||
-    (warningCount > 0 && 'Your project seems to have some warnings.') ||
-    'Your project passed lint!';
-
-  await octokit.checks.create({
-    owner,
-    repo,
-    name: 'Lint',
-    head_sha: HEAD.stdout,
-    conclusion: (errorCount > 0 && 'failure') || 'success',
-    output: {
-      title: 'ESLint Results',
-      summary,
-      annotations
-    }
-  });
-}
-
 const formatter: eslint.CLIEngine.Formatter = results => {
   let errorCount = 0;
   let warningCount = 0;
 
-  results.sort(byErrorCount).forEach(result => {
+  results.forEach(result => {
     const { messages } = result;
 
     if (messages.length === 0) {
@@ -174,7 +95,15 @@ const formatter: eslint.CLIEngine.Formatter = results => {
     warningCount += result.warningCount;
   });
 
-  addCheck(results, errorCount, warningCount);
+  createCheck({
+    tool: 'ESLint',
+    name: 'Check Code for Errors',
+    annotations: createAnnotations(results),
+    errorCount,
+    warningCount,
+    appId: APP_ID,
+    privateKey: PRIVATE_KEY
+  });
 
   return pretty(results);
 };
