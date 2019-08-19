@@ -1,3 +1,15 @@
+# v0.3.2 (Mon Aug 19 2019)
+
+#### 🐛  Bug Fix
+
+- update create-check [#8](https://github.com/hipstersmoothie/eslint-formatter-github/pull/8) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.3.1 (Mon Aug 19 2019)
 
 #### 🐛  Bug Fix
