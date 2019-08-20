@@ -74,11 +74,11 @@ export function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
   return annotations;
 }
 
-export default async (report: eslint.CLIEngine.LintReport) => {
+export default async (results: eslint.CLIEngine.LintResult[]) => {
   let errorCount = 0;
   let warningCount = 0;
 
-  report.results.forEach(result => {
+  results.forEach(result => {
     const { messages } = result;
 
     if (messages.length === 0) {
@@ -92,7 +92,7 @@ export default async (report: eslint.CLIEngine.LintReport) => {
   return createCheck({
     tool: 'ESLint',
     name: 'Check Code for Errors',
-    annotations: createAnnotations(report.results),
+    annotations: createAnnotations(results),
     errorCount,
     warningCount,
     appId: process.env.ESLINT_APP_ID
