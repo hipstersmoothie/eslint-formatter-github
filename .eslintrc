@@ -12,8 +12,16 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/camelcase": 0
+    "@typescript-eslint/camelcase": 0,
+    "complexity": 0
   }
 }
