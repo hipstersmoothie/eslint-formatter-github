@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.28.7",
-    "create-check": "^0.3.0",
+    "create-check": "^0.4.0",
     "eslint-formatter-pretty": "^2.1.1"
   },
   "devDependencies": {
