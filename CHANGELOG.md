@@ -1,3 +1,20 @@
+# v0.4.1 (Wed Aug 21 2019)
+
+#### 🐛  Bug Fix
+
+- Update dependency create-check to ^0.4.0 [#16](https://github.com/hipstersmoothie/eslint-formatter-github/pull/16) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Dependency Updates
+
+- Update dependency eslint to v6.2.1 [#14](https://github.com/hipstersmoothie/eslint-formatter-github/pull/14) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-plugin-jsdoc to v15.8.3 [#13](https://github.com/hipstersmoothie/eslint-formatter-github/pull/13) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 1
+
+- Renovate Bot ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v0.4.0 (Tue Aug 20 2019)
 
 #### 🚀  Enhancement
