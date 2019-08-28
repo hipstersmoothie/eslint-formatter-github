@@ -57,7 +57,7 @@
     "lint-staged": "9.2.5",
     "prettier": "1.18.2",
     "strip-ansi": "5.2.0",
-    "typescript": "3.5.3"
+    "typescript": "3.6.2"
   },
   "ava": {
     "serial": true
