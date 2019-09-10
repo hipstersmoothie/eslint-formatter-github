@@ -1,3 +1,39 @@
+# v0.4.2 (Tue Sep 10 2019)
+
+#### 🐛  Bug Fix
+
+- Update dependency create-check to ^0.5.0 [#34](https://github.com/hipstersmoothie/eslint-formatter-github/pull/34) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### 🏠  Internal
+
+- use shared config [#29](https://github.com/hipstersmoothie/eslint-formatter-github/pull/29) ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### 🔩 Dependency Updates
+
+- Update dependency auto to v7.4.5 [#32](https://github.com/hipstersmoothie/eslint-formatter-github/pull/32) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-config-prettier to v6.3.0 [#33](https://github.com/hipstersmoothie/eslint-formatter-github/pull/33) ([@renovate-bot](https://github.com/renovate-bot))
+- Update typescript-eslint monorepo to v2.2.0 [#31](https://github.com/hipstersmoothie/eslint-formatter-github/pull/31) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency auto to v7.4.4 [#30](https://github.com/hipstersmoothie/eslint-formatter-github/pull/30) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-config-prettier to v6.2.0 [#28](https://github.com/hipstersmoothie/eslint-formatter-github/pull/28) ([@renovate-bot](https://github.com/renovate-bot))
+- Update typescript-eslint monorepo to v2.1.0 [#27](https://github.com/hipstersmoothie/eslint-formatter-github/pull/27) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency auto to v7.4.3 [#26](https://github.com/hipstersmoothie/eslint-formatter-github/pull/26) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency husky to v3.0.5 [#25](https://github.com/hipstersmoothie/eslint-formatter-github/pull/25) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-plugin-jsdoc to v15.9.1 [#24](https://github.com/hipstersmoothie/eslint-formatter-github/pull/24) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint to v6.3.0 [#23](https://github.com/hipstersmoothie/eslint-formatter-github/pull/23) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-plugin-jsdoc to v15.8.4 [#22](https://github.com/hipstersmoothie/eslint-formatter-github/pull/22) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency typescript to v3.6.2 [#21](https://github.com/hipstersmoothie/eslint-formatter-github/pull/21) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency auto to v7.4.0 [#20](https://github.com/hipstersmoothie/eslint-formatter-github/pull/20) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint to v6.2.2 [#17](https://github.com/hipstersmoothie/eslint-formatter-github/pull/17) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency lint-staged to v9.2.5 [#18](https://github.com/hipstersmoothie/eslint-formatter-github/pull/18) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency auto to v7.3.4 [#19](https://github.com/hipstersmoothie/eslint-formatter-github/pull/19) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Renovate Bot ([@renovate-bot](https://github.com/renovate-bot))
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.4.1 (Wed Aug 21 2019)
 
 #### 🐛  Bug Fix
