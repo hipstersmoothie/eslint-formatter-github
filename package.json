@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "2.2.0",
     "auto": "7.6.0",
     "auto-config-hipstersmoothie": "1.0.4",
-    "eslint": "6.3.0",
+    "eslint": "6.5.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "6.3.0",
