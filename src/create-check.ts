@@ -1,6 +1,6 @@
 import createCheck from 'create-check';
 import path from 'path';
-import Octokit from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import eslint from 'eslint';
 
 const APP_ID = 38817;
