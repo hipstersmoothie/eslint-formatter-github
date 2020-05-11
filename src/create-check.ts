@@ -1,6 +1,5 @@
-import createCheck from 'create-check';
+import createCheck, { Annotation } from 'create-check';
 import path from 'path';
-import Octokit from '@octokit/rest';
 import eslint from 'eslint';
 
 const APP_ID = 38817;
@@ -47,8 +46,8 @@ gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
 export function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
-  const annotations: Octokit.ChecksCreateParamsOutputAnnotations[] = [];
-  const levels: Octokit.ChecksCreateParamsOutputAnnotations['annotation_level'][] = [
+  const annotations: Annotation[] = [];
+  const levels: Annotation['annotation_level'][] = [
     'notice',
     'warning',
     'failure'

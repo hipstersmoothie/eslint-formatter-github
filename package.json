@@ -33,7 +33,6 @@
     "eslint": ">= 5.x"
   },
   "dependencies": {
-    "@octokit/rest": "^16.28.7",
     "create-check": "^0.6.0",
     "eslint-formatter-pretty": "^3.0.0"
   },
