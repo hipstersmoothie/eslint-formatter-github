@@ -1,3 +1,29 @@
+# v1.0.1 (Mon May 11 2020)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Update dependency eslint to v7 [#75](https://github.com/hipstersmoothie/eslint-formatter-github/pull/75) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency auto to v9 [#66](https://github.com/hipstersmoothie/eslint-formatter-github/pull/66) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint-config-xo to v0.29.1 [#55](https://github.com/hipstersmoothie/eslint-formatter-github/pull/55) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint-plugin-prettier to v3.1.3 [#64](https://github.com/hipstersmoothie/eslint-formatter-github/pull/64) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency typescript to v3.8.3 [#54](https://github.com/hipstersmoothie/eslint-formatter-github/pull/54) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint-config-airbnb to v18.1.0 [#72](https://github.com/hipstersmoothie/eslint-formatter-github/pull/72) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency auto-config-hipstersmoothie to v3 [#69](https://github.com/hipstersmoothie/eslint-formatter-github/pull/69) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency lint-staged to v9.5.0 [#53](https://github.com/hipstersmoothie/eslint-formatter-github/pull/53) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint-config-prettier to v6.11.0 [#51](https://github.com/hipstersmoothie/eslint-formatter-github/pull/51) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint to v6.8.0 [#49](https://github.com/hipstersmoothie/eslint-formatter-github/pull/49) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+
+#### Authors: 2
+
+- [@renovate[bot]](https://github.com/renovate[bot])
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v1.0.0 (Mon May 11 2020)
 
 #### 💥  Breaking Change
