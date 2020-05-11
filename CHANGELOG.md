@@ -1,3 +1,22 @@
+# v1.0.9 (Mon May 11 2020)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Update dependency eslint-plugin-jsdoc to v25 [#76](https://github.com/hipstersmoothie/eslint-formatter-github/pull/76) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency eslint-config-airbnb-base to v14.1.0 [#73](https://github.com/hipstersmoothie/eslint-formatter-github/pull/73) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Update dependency strip-ansi to v6 [#59](https://github.com/hipstersmoothie/eslint-formatter-github/pull/59) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+
+#### Authors: 2
+
+- [@renovate[bot]](https://github.com/renovate[bot])
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v1.0.1 (Mon May 11 2020)
 
 :tada: This release contains work from a new contributor! :tada:
