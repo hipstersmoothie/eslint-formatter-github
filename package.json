@@ -1,6 +1,6 @@
 {
   "name": "eslint-formatter-github",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "See ESLint errors and warnings directly in pull requests",
   "license": "MIT",
   "repository": "hipstersmoothie/eslint-formatter-github",
