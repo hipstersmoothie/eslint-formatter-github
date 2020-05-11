@@ -1,3 +1,18 @@
+# v1.0.1 (Mon May 11 2020)
+
+#### 🐛  Bug Fix
+
+- Update dependency auto-config-hipstersmoothie to v3 [#69](https://github.com/hipstersmoothie/eslint-formatter-github/pull/69) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency lint-staged to v9.5.0 [#53](https://github.com/hipstersmoothie/eslint-formatter-github/pull/53) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint-config-prettier to v6.11.0 [#51](https://github.com/hipstersmoothie/eslint-formatter-github/pull/51) ([@renovate-bot](https://github.com/renovate-bot))
+- Update dependency eslint to v6.8.0 [#49](https://github.com/hipstersmoothie/eslint-formatter-github/pull/49) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 1
+
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v1.0.0 (Mon May 11 2020)
 
 #### 💥  Breaking Change
