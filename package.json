@@ -42,7 +42,7 @@
     "@types/lru-cache": "5.1.0",
     "@typescript-eslint/eslint-plugin": "2.32.0",
     "@typescript-eslint/parser": "2.32.0",
-    "auto": "9.31.2",
+    "auto": "9.61.0",
     "auto-config-hipstersmoothie": "3.0.23",
     "eslint": "7.0.0",
     "eslint-config-airbnb": "18.1.0",
