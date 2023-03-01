@@ -90,7 +90,7 @@ export default async (results: eslint.CLIEngine.LintResult[]) => {
 
   return createCheck({
     tool: 'ESLint',
-    name: process.env.GITHUB_CHECK_NAME || 'Check Code for Errors',
+    name: process.env.GH_CHECK_NAME || 'Check Code for Errors',
     annotations: createAnnotations(results),
     errorCount,
     warningCount,

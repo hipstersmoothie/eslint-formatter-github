@@ -65,3 +65,7 @@ Once you have generated a key, open the file that is downloaded and copy to text
 ### 4. Set `GH_API` (enterprise only)
 
 To get this package to work on github enterprise instances you will need to set the `GH_API` environment variable to a url pointing towards your enterprise GitHub's API.
+
+### 5. (optional) Set `GH_CHECK_NAME`
+
+If the default check name conflicts with something, you can override it by passing `GH_CHECK_NAME` environment variable.
