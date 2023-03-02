@@ -15,6 +15,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "skipLibCheck": true
   }
 }
