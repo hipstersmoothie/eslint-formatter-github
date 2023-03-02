@@ -46,6 +46,12 @@ rxXIyGcdFUjpY/U2tobjXousbYyz8/DqgDoLWXOMt2dNkbbNAN8L3OMVTGb6TzS2
 gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
+const annotationsOrder: Record<Annotation['annotation_level'], number> = {
+  'failure': 1,
+  'warning': 2,
+  'notice': 3,
+}
+
 export async function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
   const repoRoot = (await execa('git', ['rev-parse', '--show-toplevel'])).stdout;
 
@@ -73,7 +79,7 @@ export async function createAnnotations(results: eslint.CLIEngine.LintResult[]) 
     }
   }
 
-  return annotations;
+  return annotations.sort((a, b) => annotationsOrder[a.annotation_level] - annotationsOrder[b.annotation_level]);
 }
 
 export default async (results: eslint.CLIEngine.LintResult[]) => {
