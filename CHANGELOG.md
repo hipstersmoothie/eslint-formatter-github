@@ -1,3 +1,15 @@
+# v1.1.1 (Thu Mar 02 2023)
+
+#### ⚠️ Pushed to `master`
+
+- update config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v1.0.10 (Mon May 11 2020)
 
 :tada: This release contains work from a new contributor! :tada:
