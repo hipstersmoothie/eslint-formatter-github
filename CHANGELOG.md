@@ -1,3 +1,22 @@
+# v1.1.0 (Thu Mar 02 2023)
+
+#### 🚀 Enhancement
+
+- Allow to pass check name environment variable [#113](https://github.com/hipstersmoothie/eslint-formatter-github/pull/113) ([@PaulGiletich](https://github.com/PaulGiletich))
+
+#### ⚠️ Pushed to `master`
+
+- update config ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- upgrade auto ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- fix build ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 2
+
+- [@PaulGiletich](https://github.com/PaulGiletich)
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v1.0.10 (Mon May 11 2020)
 
 :tada: This release contains work from a new contributor! :tada:
