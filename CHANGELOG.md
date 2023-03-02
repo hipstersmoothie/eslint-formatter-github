@@ -1,3 +1,15 @@
+# v1.1.3 (Thu Mar 02 2023)
+
+#### 🐛 Bug Fix
+
+- sort annotations by severity [#115](https://github.com/hipstersmoothie/eslint-formatter-github/pull/115) ([@PaulGiletich](https://github.com/PaulGiletich))
+
+#### Authors: 1
+
+- [@PaulGiletich](https://github.com/PaulGiletich)
+
+---
+
 # v1.1.2 (Thu Mar 02 2023)
 
 #### 🐛 Bug Fix
