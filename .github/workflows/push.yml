@@ -2,6 +2,19 @@ name: Node CI
 
 on: [push]
 
+# Enabled permissions on GITHUB_TOKEN
+permissions:
+  # To be able to push to the repo
+  contents: write
+  # To update the pr description with canary info
+  pull-requests: write
+  # For pr-check to create a status
+  statuses: write
+  # Needed to create PR statuses/checks
+  checks: write
+  # To post comments on PRs
+  issues: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,44 +24,35 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and lint
-      run: |
-        yarn
-        yarn build
-        yarn lint
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and lint
+        run: |
+          yarn
+          yarn build
+          yarn lint
   release:
     runs-on: ubuntu-latest
-
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
     steps:
-    - uses: actions/checkout@v1
-    - name: Skip CI
-      uses: veggiemonk/skip-commit@master
-      env:
-        COMMIT_FILTER: skip ci
-    - name: Prepare repository
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        git checkout "${GITHUB_REF:11}"
-        git remote rm origin
-        git remote add origin "https://$GH_TOKEN@github.com/hipstersmoothie/eslint-formatter-github.git"
-        git fetch origin
-        git branch --set-upstream-to origin/master
-    - name: Use Node.js 12.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - name: Create Release
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: |
-        git remote -v
-        yarn
-        yarn build
-        yarn release
+      - uses: actions/checkout@v2
+
+      - name: Prepare repository
+        run: git fetch --unshallow --tags
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          yarn
+          yarn build
+          yarn release
