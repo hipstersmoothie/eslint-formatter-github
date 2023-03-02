@@ -1,6 +1,7 @@
 import createCheck, { Annotation } from 'create-check';
 import path from 'path';
 import eslint from 'eslint';
+import execa from 'execa';
 
 const APP_ID = 38817;
 /**
@@ -45,7 +46,9 @@ rxXIyGcdFUjpY/U2tobjXousbYyz8/DqgDoLWXOMt2dNkbbNAN8L3OMVTGb6TzS2
 gd8URXIGc6Nk7ueWMKEZaropIg6q1J7e9qJdlzA6j1fu6vVY3qX3tA==
 -----END RSA PRIVATE KEY-----`;
 
-export function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
+export async function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
+  const repoRoot = (await execa('git', ['rev-parse', '--show-toplevel'])).stdout;
+
   const annotations: Annotation[] = [];
   const levels: Annotation['annotation_level'][] = [
     'notice',
@@ -61,7 +64,7 @@ export function createAnnotations(results: eslint.CLIEngine.LintResult[]) {
       const annotationLevel = levels[severity];
 
       annotations.push({
-        path: path.relative(process.cwd(), filePath),
+        path: path.relative(repoRoot, filePath),
         start_line: line,
         end_line: line,
         annotation_level: annotationLevel,
@@ -91,7 +94,7 @@ export default async (results: eslint.CLIEngine.LintResult[]) => {
   return createCheck({
     tool: 'ESLint',
     name: process.env.GH_CHECK_NAME || 'Check Code for Errors',
-    annotations: createAnnotations(results),
+    annotations: await createAnnotations(results),
     errorCount,
     warningCount,
     appId: process.env.ESLINT_APP_ID
