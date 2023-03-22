@@ -97,6 +97,14 @@ export default async (results: eslint.CLIEngine.LintResult[]) => {
     warningCount += result.warningCount;
   });
 
+  let privateKey = process.env.ESLINT_PRIVATE_KEY || PRIVATE_KEY;
+  if (process.env.ESLINT_PRIVATE_KEY_BASE64) {
+    privateKey = Buffer.from(
+      process.env.ESLINT_PRIVATE_KEY_BASE64,
+      'base64'
+    ).toString();
+  }
+
   return createCheck({
     tool: 'ESLint',
     name: process.env.GH_CHECK_NAME || 'Check Code for Errors',
@@ -106,6 +114,6 @@ export default async (results: eslint.CLIEngine.LintResult[]) => {
     appId: process.env.ESLINT_APP_ID
       ? Number(process.env.ESLINT_APP_ID)
       : APP_ID,
-    privateKey: process.env.ESLINT_PRIVATE_KEY || PRIVATE_KEY
+    privateKey
   });
 };
