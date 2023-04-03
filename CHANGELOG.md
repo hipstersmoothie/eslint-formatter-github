@@ -1,3 +1,19 @@
+# v1.1.4 (Mon Apr 03 2023)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Johannes Waigel ([@waigel](https://github.com/waigel)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Improve documentation and add ESLINT_PRIVATE_KEY_BASE64 variable [#116](https://github.com/hipstersmoothie/eslint-formatter-github/pull/116) ([@waigel](https://github.com/waigel))
+
+#### Authors: 1
+
+- Johannes Waigel ([@waigel](https://github.com/waigel))
+
+---
+
 # v1.1.3 (Thu Mar 02 2023)
 
 #### 🐛 Bug Fix
